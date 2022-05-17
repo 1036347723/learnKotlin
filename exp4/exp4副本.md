@@ -1,12 +1,4 @@
-# 一.利用jupyer跑python代码，并且进行简单的数据处理
-
-# 0.记录一下常用的快捷键:
-- 1.命令行模式下 H 可以打开查看常用快捷键(esc可以从编辑模式退出到命令行模式。
-- 2.命令行模式下A可以在上方插空格，B在下方。
-- 3.shift + 上/下/K 可以自由切换代码块
-- 4.ctrl + enter 运行选中的代码块，shift + enter 运行当前代码块并调到下一块
-
-##  1.首先进行一个程序员都懂得hello world操作，然后利用用选择排序来熟悉一下python，代码如下：
+# 利用jupyer跑python代码，并且进行简单的数据处理
 
 
 ```python
@@ -31,11 +23,12 @@ y = square(x)
 print("%d square is %d" % (x,y))
 ```
 
-    7 square is 49
+    6 square is 36
     
 
 
-# 此处为选出排序的代码
+```python
+
 def selection_sort(num):
     for i in range(0,len(num)-1):
         for j in range(i+1,len(num)-1):
@@ -48,13 +41,13 @@ def test():
     print(selection_sort(array))
     
 test()
-## 2.用pyhton进行数据处理，开始实战
-现在下载数据，注意把数据保存在自己常用的位置，同时在读取文件时要写入该地址。
+```
 
+    [5, 7, 10, 15, 17, 24, 27, 30, 36, 45, 50, 21]
+    
 
 
 ```python
-# 导入相关的工具库，加载数据集。
 %matplotlib inline
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -64,7 +57,6 @@ import seaborn as sns
 
 ```python
 df = pd.read_csv('G:/notebook/fortune500.csv')
-# 导入后对数据集进行一系列地检查。并进行数据列重命名和清洗无用数据的操作。
 df.head()
 ```
 
@@ -225,7 +217,7 @@ df.tail()
 
 
 ```python
-df.columns = ['year','rank','company','revenue','profit'] # 对表格竖栏数据命名
+df.columns = ['year','rank','company','revenue','profit']
 ```
 
 
@@ -242,7 +234,7 @@ len(df)
 
 
 ```python
-df.dtypes   #查看数据格式
+df.dtypes
 ```
 
 
@@ -260,7 +252,7 @@ df.dtypes   #查看数据格式
 
 ```python
 non_numberic_profits = df.profit.str.contains('[^0-9.-]')
-df.loc[non_numberic_profits].head()              #通过正则表达式找出格式不对的数据
+df.loc[non_numberic_profits].head()
 ```
 
 
@@ -340,7 +332,7 @@ df.loc[non_numberic_profits].head()              #通过正则表达式找出格
 
 
 ```python
-len(df.profit[non_numberic_profits]) #查看有多少个
+len(df.profit[non_numberic_profits])
 ```
 
 
@@ -357,14 +349,14 @@ bin_sizes, _, _ = plt.hist(df.year[non_numberic_profits], bins=range(1955, 2006)
 
 
     
-![png](output_17_0.png)
+![png](output_13_0.png)
     
 
 
 
 ```python
 df = df.loc[~non_numberic_profits]
-df.profit = df.profit.apply(pd.to_numeric)  #将不对的数据格式清除，可以清除的原因是筛选出来的数据不多，清除后对原来的数据集影响不大
+df.profit = df.profit.apply(pd.to_numeric)
 ```
 
 
@@ -381,7 +373,7 @@ len(df)
 
 
 ```python
-df.dtypes   #再次查看profit的格式，可以知道已经清洗成功
+df.dtypes
 ```
 
 
@@ -398,7 +390,6 @@ df.dtypes   #再次查看profit的格式，可以知道已经清洗成功
 
 
 ```python
-# 绘制数据图表
 group_by_year = df.loc[:, ['year', 'revenue', 'profit']].groupby('year')
 avgs = group_by_year.mean()
 x = avgs.index
@@ -408,15 +399,6 @@ def plot(x, y, ax, title, y_label):
     ax.set_ylabel(y_label)
     ax.plot(x, y)
     ax.margins(x=0, y=0)
-
-# 自己写的一个绘制柱形图的函数
-
-def  bar(x,y,ax,title,y_label):
-    ax.set_title(title)
-    ax.set_ylabel(y_label)
-    ax.bar(x, y)
-    ax.margins(x=0, y=0)
-
 ```
 
 
@@ -427,14 +409,9 @@ plot(x, y1, ax, 'Increase in mean Fortune 500 company profits from 1955 to 2005'
 
 
     
-![png](output_22_0.png)
+![png](output_18_0.png)
     
 
-
-
-```python
-
-```
 
 
 ```python
@@ -446,21 +423,7 @@ plot(x, y2, ax, 'Increase in mean Fortune 500 company revenues from 1955 to 2005
 
 
     
-![png](output_24_0.png)
-    
-
-
-
-```python
-# 自己尝试画一下支出图，依据公式为： 收入-支出= 利润  =》 支出 = 收入 - 利润。 
-y3 = avgs.revenue - avgs.profit
-fig, ax = plt.subplots()
-bar(x, y2, ax, 'Increase in mean Fortune 500 company cost from 1955 to 2005', 'Cost (millions)')
-```
-
-
-    
-![png](output_25_0.png)
+![png](output_19_0.png)
     
 
 
@@ -482,20 +445,15 @@ fig.tight_layout()
 
 
     
-![png](output_26_0.png)
+![png](output_20_0.png)
     
 
 
-
-```python
-
-```
-
-# 二.安装Jupyter Notebook扩展工具
+# 安装Jupyter Notebook扩展工具
 
 ## 打开ANACONDA，启动cmd
 ![1](1.png)
-![2](4.png)
+![2](4.png)  
 之后在弹出终端中一次输入一下4条命令
 ```
 pip install jupyter_contrib_nbextensions
@@ -510,8 +468,8 @@ jupyter nbextensions_configurator enable --user
 ![3](3.png)
 
 点击Nbextensions标签，取消勾选第一行，再勾选上Hinterland。
-
 ![4](5.png)
 
 进行代码编辑可以发现此时已经拥有代码补全功能。
+
 ![5](2.png)
