@@ -494,8 +494,8 @@ fig.tight_layout()
 # 二.安装Jupyter Notebook扩展工具
 
 ## 打开ANACONDA，启动cmd
-![1](1.png)
-![2](4.png)
+![1]（/1.png）
+![2]（/4.png）
 之后在弹出终端中一次输入一下4条命令
 ```
 pip install jupyter_contrib_nbextensions
@@ -507,11 +507,9 @@ pip install jupyter_nbextensions_configurator
 jupyter nbextensions_configurator enable --user
 ```
 之后重启画面可以看到多了Nbextensions标签。
-![3](3.png)
+![3]（/3.png）
 
 点击Nbextensions标签，取消勾选第一行，再勾选上Hinterland。
-
-![4](5.png)
-
+![4]（/5.png）
 进行代码编辑可以发现此时已经拥有代码补全功能。
-![5](2.png)
+![5]（/2.png）
