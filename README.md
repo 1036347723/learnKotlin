@@ -1,3 +1,4 @@
+# exp1 和 exp2 在此readme中，其余实验在各自文件夹，还请打开查看，谢谢hhh
 #  exp1  安装软件
 ## 1.安装anaconda
 1.进入官网，下载Anaconda
